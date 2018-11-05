@@ -44,7 +44,7 @@ public class SearchController {
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-    	model.addAttribute("name", array.toString());
+    	model.addAttribute("name",array.toString());
         return "search";
     }
 
