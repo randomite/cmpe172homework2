@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import twitter4j.IDs;
+import twitter4j.JSONArray;
+import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import twitter4j.conf.ConfigurationBuilder;
 
 @Controller
@@ -27,7 +30,13 @@ public class FollowingController {
     	Twitter twitter = tf.getInstance();
         long cursor = -1;
         IDs ids = twitter.getFriendsIDs(cursor);
-        model.addAttribute("name", ids.getIDs().length);
+        JSONArray array = new JSONArray();
+        ResponseList<User> users =  twitter.lookupUsers(ids.getIDs());
+        for(User user: users) {
+        	array.put(user.getName());
+        }
+        System.out.println(array.toString());
+        model.addAttribute("name", array.toString());
         return "home";
     }
 
