@@ -26,20 +26,12 @@ public class FollowersController {
     	TwitterFactory tf = new TwitterFactory(cb.build());
     	Twitter twitter = tf.getInstance();
     	try {
-            long cursor = -1;
-            IDs ids;
-            System.out.println("Listing followers's ids.");
-            do {
-            	ids = twitter.getFollowersIDs(cursor);
-                for (long id : ids.getIDs()) {
-                    System.out.println(id);
-                }
-            } while ((cursor = ids.getNextCursor()) != 0);
+            IDs ids  = twitter.getFollowersIDs(-1);
+            model.addAttribute("name", ids.getIDs().length);
         } catch (TwitterException te) {
             te.printStackTrace();
-            System.out.println("Failed to get followers' ids: " + te.getMessage());
         }
-    	model.addAttribute("name", name);
+    	
         return "home";
     }
 
