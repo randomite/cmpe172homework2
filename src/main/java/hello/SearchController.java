@@ -41,7 +41,7 @@ public class SearchController {
 			e.printStackTrace();
 		}
     	model.addAttribute("name", data.toString());
-        return "home";
+        return "search";
     }
 
 }
