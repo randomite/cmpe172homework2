@@ -43,7 +43,7 @@ public class RetweetsController {
     	}
     	
         model.addAttribute("name", array.toString());
-        return "home";
+        return "retweet";
     }
 
 }
