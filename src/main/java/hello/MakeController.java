@@ -15,7 +15,7 @@ import twitter4j.conf.ConfigurationBuilder;
 public class MakeController {
 
     @GetMapping("/make")
-    public String greeting(@RequestParam(name="text", required=false, defaultValue="Default tweet text :)") String name, Model model) {
+    public String make(@RequestParam(name="text", required=false, defaultValue="Default tweet text :)") String name, Model model) {
     	model.addAttribute("name", name);
     	
     	ConfigurationBuilder cb = new ConfigurationBuilder();

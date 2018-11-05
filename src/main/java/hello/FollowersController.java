@@ -5,21 +5,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import twitter4j.JSONObject;
-import twitter4j.Query;
-import twitter4j.QueryResult;
+import twitter4j.IDs;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-
 @Controller
-public class SearchController {
+public class FollowersController {
 
-    @GetMapping("/search")
-    public String search(@RequestParam(name="query", required=false, defaultValue="World") String query, Model model) {
+    @GetMapping("/followers")
+    public String followers(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
     	ConfigurationBuilder cb = new ConfigurationBuilder();
     	cb.setDebugEnabled(true)
     	  .setOAuthConsumerKey("BUo2i2DGfvgre5ZG7amnQJwuW")
@@ -28,19 +25,21 @@ public class SearchController {
     	  .setOAuthAccessTokenSecret("zLWg68fUFQHI1OVKofya8Q3vR9NoxG0r14uhTs7OmEQL6");
     	TwitterFactory tf = new TwitterFactory(cb.build());
     	Twitter twitter = tf.getInstance();
-        Query twitterQuery = new Query(query);
-        QueryResult result;
-        JSONObject data = new JSONObject();
-		try {
-			result = twitter.search(twitterQuery);
-			for (Status status : result.getTweets()) {
-				data.put(status.getUser().getScreenName(), status.getText());
-	            System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
-	        }
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
-    	model.addAttribute("name", data.toString());
+    	try {
+            long cursor = -1;
+            IDs ids;
+            System.out.println("Listing followers's ids.");
+            do {
+            	ids = twitter.getFollowersIDs(cursor);
+                for (long id : ids.getIDs()) {
+                    System.out.println(id);
+                }
+            } while ((cursor = ids.getNextCursor()) != 0);
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Failed to get followers' ids: " + te.getMessage());
+        }
+    	model.addAttribute("name", name);
         return "home";
     }
 
