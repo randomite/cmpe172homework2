@@ -6,15 +6,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<div class="container">
+<div class="jumbotron">
 
     <h1 class="display-4">Your next Tweet!</h1>
-    <form>
+    <form method="GET" action="/make">
   <div class="form-group">
     <label for="newTweet">What do you like to say?</label>
-    <input type="text" class="form-control" id="newTweet" placeholder="Speak your heart out!">
+    <input type="text" class="form-control" name="text" id="newTweet" placeholder="Speak your heart out!">
   </div>
-      <button type="button" class="btn btn-primary">Post</button>
+      <input type="submit" class="btn btn-primary" value="Post"></input>
+    </form>
+    <br/><button class="btn btn-primary" onclick="window.location.href='/'">Back</button>
 </div>
 
 
