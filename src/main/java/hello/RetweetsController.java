@@ -5,18 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import twitter4j.IDs;
 import twitter4j.JSONArray;
 import twitter4j.JSONObject;
-import twitter4j.Location;
 import twitter4j.ResponseList;
 import twitter4j.Status;
-import twitter4j.Trend;
-import twitter4j.Trends;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.TwitterResponse;
 import twitter4j.conf.ConfigurationBuilder;
 
 @Controller
