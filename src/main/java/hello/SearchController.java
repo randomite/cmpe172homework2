@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import twitter4j.JSONArray;
 import twitter4j.JSONObject;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -30,17 +31,20 @@ public class SearchController {
     	Twitter twitter = tf.getInstance();
         Query twitterQuery = new Query(query);
         QueryResult result;
-        JSONObject data = new JSONObject();
+        JSONArray array = new JSONArray();
 		try {
 			result = twitter.search(twitterQuery);
 			for (Status status : result.getTweets()) {
-				data.put(status.getUser().getScreenName(), status.getText());
+				JSONObject data = new JSONObject();
+				data.put("username", status.getUser().getScreenName());
+				data.put("tweet", status.getText());
+				array.put(data);
 	            System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
 	        }
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-    	model.addAttribute("name", data.toString());
+    	model.addAttribute("name", array.toString());
         return "search";
     }
 
