@@ -39,7 +39,7 @@ public class TrendingController {
         }
         model.addAttribute("name", array.toString());
         System.out.println(array.toString());
-        return "home";
+        return "trending";
     }
 
 }

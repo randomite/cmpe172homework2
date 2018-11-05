@@ -32,7 +32,7 @@ public class FollowersController {
             te.printStackTrace();
         }
     	
-        return "home";
+        return "followers";
     }
 
 }

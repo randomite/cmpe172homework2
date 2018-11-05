@@ -33,7 +33,7 @@ public class MakeController {
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-        return "greeting";
+        return "make";
     }
 
 }

@@ -37,7 +37,7 @@ public class FollowingController {
         }
         System.out.println(array.toString());
         model.addAttribute("name", array.toString());
-        return "home";
+        return "following";
     }
 
 }
