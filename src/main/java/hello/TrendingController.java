@@ -34,7 +34,6 @@ public class TrendingController {
     	int woeid = 23424977;
         Trends trends = twitter.getPlaceTrends(woeid);
         JSONArray array = new JSONArray();
-        System.out.println("Showing trends for " + trends.getLocation().getName());
         for (Trend trend : trends.getTrends()) {
         	array.put(trend.getName());
         }
