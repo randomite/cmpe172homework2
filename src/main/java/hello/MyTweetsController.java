@@ -42,7 +42,7 @@ public class MyTweetsController {
 			array.put(data);
     	}
         model.addAttribute("name", array.toString());
-        return "home";
+        return "myteets";
     }
 
 }

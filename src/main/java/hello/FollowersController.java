@@ -35,8 +35,8 @@ public class FollowersController {
         for(User user: users) {
         	array.put(user.getName());
         }
-        model.addAttribute("name", array.toString());
-        return "home";
+        model.addAttribute("name", array.toString());  	
+        return "followers";
     }
 
 }
